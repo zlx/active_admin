@@ -507,5 +507,27 @@ describe ActiveAdmin::FormBuilder do
       body.should have_tag("input", :attributes => { :type => "text", :name => "post[title]" })
     end
   end
+  
+  describe "select2 input" do
+    before do
+      User.create :first_name => "John", :last_name => "Doe"
+      User.create :first_name => "Jane", :last_name => "Doe"
+    end
+
+    describe "as select" do
+      let :body do
+        build_form do |f|
+          f.input :author, as: :select2
+        end
+      end
+      it "should create input with select2_author" do
+        body.scan("select2_author").size.should > 1
+      end
+      
+      it "should contain script" do
+        body.scan(/\<script/).size.should == 1
+      end
+    end
+  end
 
 end

@@ -2,6 +2,7 @@ module ActiveAdmin
   module Inputs
     extend ActiveSupport::Autoload
 
+    autoload :Select2Input
     autoload :DatepickerInput
 
     autoload :FilterBase
